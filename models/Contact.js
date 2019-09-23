@@ -1,9 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ContactSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'users'
+    ref: "users"
+  },
+  unit_system: {
+    type: String,
+    required: true
   },
   name: {
     type: String,
@@ -18,12 +22,36 @@ const ContactSchema = mongoose.Schema({
   },
   type: {
     type: String,
-    default: 'personal'
+    default: "personal"
   },
   date: {
     type: Date,
     default: Date.now
+  },
+  minL: {
+    type: String
+  },
+  minW: {
+    type: String
+  },
+  minT: {
+    type: String
+  },
+  maxL: {
+    type: String
+  },
+  maxW: {
+    type: String
+  },
+  maxT: {
+    type: String
+  },
+  mat_cost: {
+    type:String
+  },
+  comp_factor:{
+    type: String
   }
 });
 
-module.exports = mongoose.model('contact', ContactSchema);
+module.exports = mongoose.model("contact", ContactSchema);

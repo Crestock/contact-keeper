@@ -55,8 +55,8 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  title: 'Contact Keeper',
-  icon: 'fas fa-id-card-alt'
+  title: 'Supply Chain app',
+  icon: 'fas fa-industry'
 };
 
 export default Navbar;
