@@ -40,11 +40,16 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { test } = req.body;
+    const { test, quantity, length, width, thickness, units } = req.body;
 
     try {
       const newCatalog = new Catalog({
         test,
+        quantity,
+        length,
+        width,
+        thickness,
+        units,
         user: req.user.id
       });
 

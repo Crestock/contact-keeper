@@ -8,6 +8,22 @@ const CatalogSchema = mongoose.Schema({
   test: {
     type: String,
     required: true
+  },
+  units: {
+    type: String
+  },
+  length: {
+    type: String
+  },
+  width: {
+    type: String
+  },
+  thickness: {
+    type: String
+  },
+  quantity: {
+    type: String,
+    required: true
   }
 });
 
