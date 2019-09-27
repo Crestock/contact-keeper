@@ -11,7 +11,7 @@ const ContactItem = ({ contact }) => {
     name,
     email,
     phone,
-    type,
+   
     minL,
     minW,
     minT,
@@ -19,8 +19,7 @@ const ContactItem = ({ contact }) => {
     maxW,
     maxT,
     unit_system,
-    mat_cost,
-    comp_factor
+    
   } = contact;
 
   const onDelete = () => {
