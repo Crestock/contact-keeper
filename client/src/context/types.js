@@ -29,7 +29,14 @@ export const LOGOUT = "LOGOUT";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 //catalog types
-export const GET_CATALOG = "GET_CATALOG";
+export const GET_CATALOGS = "GET_CATALOGS";
 export const ADD_CATALOG = "ADD_CATALOG";
 export const DELETE_CATALOG = "DELETE_CATALOG";
 export const UPDATE_CATALOG = "UPDATE_CATALOG";
+
+//filter catalogs
+export const FILTER_CATALOGS = "FILTER_CATALOGS";
+export const CLEAR_CATALOGS = "CLEAR_CATALOGS";
+
+//catalog error
+export const CATALOG_ERROR = "CATALOG_ERROR";

@@ -5,25 +5,52 @@ const CatalogSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "users"
   },
-  test: {
+  unit_system: {
     type: String,
     required: true
   },
-  units: {
-    type: String
-  },
-  length: {
-    type: String
-  },
-  width: {
-    type: String
-  },
-  thickness: {
-    type: String
-  },
-  quantity: {
+  name: {
     type: String,
     required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  phone: {
+    type: String
+  },
+  type: {
+    type: String,
+    default: "personal"
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  minL: {
+    type: String
+  },
+  minW: {
+    type: String
+  },
+  minT: {
+    type: String
+  },
+  maxL: {
+    type: String
+  },
+  maxW: {
+    type: String
+  },
+  maxT: {
+    type: String
+  },
+  mat_cost: {
+    type:String
+  },
+  comp_factor:{
+    type: String
   }
 });
 
