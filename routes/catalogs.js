@@ -4,32 +4,32 @@ const auth = require("../middleware/auth");
 const { check, validationResult } = require("express-validator/check");
 
 const User = require("../models/User");
-const Catalog = require("../models/Catalog");
+const Contact = require("../models/Catalog");
 
-// @route     GET api/catalogs
-// @desc      Get all users catalogs
+// @route     GET api/contacts
+// @desc      Get all users contacts
 // @access    Private
 router.get("/", auth, async (req, res) => {
   try {
-    const catalogs = await Catalog.find({ user: req.user.id }).sort({
+    const contacts = await Contact.find({ user: req.user.id }).sort({
       date: -1
     });
-    res.json(catalogs);
+    res.json(contacts);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
 
-// @route     POST api/catalogs
-// @desc      Add new catalog
+// @route     POST api/contacts
+// @desc      Add new contact
 // @access    Private
 router.post(
   "/",
   [
     auth,
     [
-      check("test", "test is required")
+      check("name", "Name is required")
         .not()
         .isEmpty()
     ]
@@ -40,84 +40,129 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { test, quantity, length, width, thickness, units } = req.body;
+    const {
+      name,
+      email,
+      phone,
+      type,
+      minL,
+      minW,
+      minT,
+      maxL,
+      maxW,
+      maxT,
+      unit_system,
+      mat_cost,
+      comp_factor
+    } = req.body;
 
     try {
-      const newCatalog = new Catalog({
-        test,
-        quantity,
-        length,
-        width,
-        thickness,
-        units,
+      const newContact = new Contact({
+        name,
+        email,
+        phone,
+        type,
+        minL,
+        minW,
+        minT,
+        maxL,
+        maxW,
+        maxT,
+        unit_system,
+        mat_cost,
+        comp_factor,
         user: req.user.id
       });
 
-      const catalog = await newCatalog.save();
+      const contact = await newContact.save();
 
-      res.json(catalog);
+      res.json(contact);
     } catch (err) {
       console.error(er.message);
       res.status(500).send("Server Error");
     }
   }
 );
-/*
-// @route     PUT api/catalogs/:id
-// @desc      Update catalog
+
+// @route     PUT api/contacts/:id
+// @desc      Update contact
 // @access    Private
 router.put("/:id", auth, async (req, res) => {
-  const { test } = req.body;
+  const {
+    name,
+    email,
+    phone,
+    type,
+    minL,
+    minW,
+    minT,
+    maxL,
+    maxW,
+    maxT,
+    unit_system
+  } = req.body;
 
-  // Build catalog object
-  const catalogFields = {};
-  if (test) catalogFields.test = test;
+  // Build contact object
+  const contactFields = {};
+  if (name) contactFields.name = name;
+  if (email) contactFields.email = email;
+  if (phone) contactFields.phone = phone;
+  if (type) contactFields.type = type;
+  if (minL) contactFields.minL = minL;
+  if (minW) contactFields.minW = minW;
+  if (minT) contactFields.minT = minT;
+  if (maxL) contactFields.maxL = maxL;
+  if (maxW) contactFields.maxW = maxW;
+  if (maxT) contactFields.maxT = maxT;
+  if (unit_system) contactFields.unit_system = unit_system;
+  if (mat_cost) contactFields.mat_cost = mat_cost;
+  if (comp_factor) contactFields.comp_factor = comp_factor;
+
 
   try {
-    let catalog = await Catalog.findById(req.params.id);
+    let contact = await Contact.findById(req.params.id);
 
-    if (!catalog) return res.status(404).json({ msg: "Catalog not found" });
+    if (!contact) return res.status(404).json({ msg: "Contact not found" });
 
-    // Make sure user owns catalog
-    if (catalog.user.toString() !== req.user.id) {
+    // Make sure user owns contact
+    if (contact.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: "Not authorized" });
     }
 
-    catalog = await Catalog.findByIdAndUpdate(
+    contact = await Contact.findByIdAndUpdate(
       req.params.id,
       { $set: contactFields },
       { new: true }
     );
 
-    res.json(catalog);
+    res.json(contact);
   } catch (err) {
     console.error(er.message);
     res.status(500).send("Server Error");
   }
 });
 
-// @route     DELETE api/catalogs/:id
-// @desc      Delete catalog
+// @route     DELETE api/contacts/:id
+// @desc      Delete contact
 // @access    Private
 router.delete("/:id", auth, async (req, res) => {
   try {
-    let catalog = await Catalog.findById(req.params.id);
+    let contact = await Contact.findById(req.params.id);
 
-    if (!catalog) return res.status(404).json({ msg: "Catalog not found" });
+    if (!contact) return res.status(404).json({ msg: "Contact not found" });
 
-    // Make sure user owns catalog
-    if (catalog.user.toString() !== req.user.id) {
+    // Make sure user owns contact
+    if (contact.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: "Not authorized" });
     }
 
-    await Catalog.findByIdAndRemove(req.params.id);
+    await Contact.findByIdAndRemove(req.params.id);
 
-    res.json({ msg: "Catalog removed" });
+    res.json({ msg: "Contact removed" });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
 
-*/
 module.exports = router;
