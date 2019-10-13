@@ -65,6 +65,7 @@ const ContactState = props => {
     }
   };
 
+
   // Delete Contact
   const deleteContact = async id => {
     try {
@@ -109,6 +110,28 @@ const ContactState = props => {
     }
   };
 
+  // Create contact+form object and submit to products database
+  const addMerge = async contact => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res = await axios.post('/api/products', contact, config);
+
+      dispatch({
+        type: ADD_CONTACT,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
   // Clear Contacts
   const clearContacts = () => {
     dispatch({ type: CLEAR_CONTACTS });
@@ -142,6 +165,7 @@ const ContactState = props => {
         filtered: state.filtered,
         error: state.error,
         addContact,
+        addMerge,
         deleteContact,
         setCurrent,
         clearCurrent,

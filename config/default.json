@@ -1,4 +1,8 @@
 {
+<<<<<<< Updated upstream
   "mongoURI": "mongodb+srv://Fraser:Holly31@cluster0-cjhn3.mongodb.net/test?retryWrites=true&w=majority",
+=======
+  "mongoURI": "mongodb+srv://Fraser:Holly31@contactkeeper-2gngc.mongodb.net/test?retryWrites=true&w=majority",
+>>>>>>> Stashed changes
   "jwtSecret": "secret"
 }

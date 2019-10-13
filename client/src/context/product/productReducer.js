@@ -1,57 +1,50 @@
 import {
-  GET_CONTACTS,
-  ADD_CONTACT,
-  DELETE_CONTACT,
+  GET_PRODUCTS,
+  ADD_PRODUCT,
+  DELETE_PRODUCT,
   SET_CURRENT,
   CLEAR_CURRENT,
-  UPDATE_CONTACT,
-  FILTER_CONTACTS,
+  UPDATE_PRODUCT,
+  FILTER_PRODUCTS,
   CLEAR_FILTER,
-  CONTACT_ERROR,
-  CLEAR_CONTACTS,
-  MERGE_CONTACT
+  PRODUCT_ERROR,
+  CLEAR_PRODUCTS
 } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
-    case GET_CONTACTS:
+    case GET_PRODUCTS:
       return {
         ...state,
-        contacts: action.payload,
+        products: action.payload,
         loading: false
       };
-    case ADD_CONTACT:
+    case ADD_PRODUCT:
       return {
         ...state,
-        contacts: [action.payload, ...state.contacts],
+        products: [action.payload, ...state.products],
         loading: false
       };
-    case UPDATE_CONTACT:
+    case UPDATE_PRODUCT:
       return {
         ...state,
-        contacts: state.contacts.map(contact =>
-          contact._id === action.payload._id ? action.payload : contact
+        products: state.products.map(product =>
+          product._id === action.payload._id ? action.payload : product
         ),
         loading: false
       };
-    
-    case MERGE_CONTACT:
+    case DELETE_PRODUCT:
       return {
         ...state,
-        merger: action.payload
-      };
-    case DELETE_CONTACT:
-      return {
-        ...state,
-        contacts: state.contacts.filter(
-          contact => contact._id !== action.payload
+        products: state.products.filter(
+          product => product._id !== action.payload
         ),
         loading: false
       };
-    case CLEAR_CONTACTS:
+    case CLEAR_PRODUCTS:
       return {
         ...state,
-        contacts: null,
+        products: null,
         filtered: null,
         error: null,
         current: null
@@ -66,12 +59,12 @@ export default (state, action) => {
         ...state,
         current: null
       };
-    case FILTER_CONTACTS:
+    case FILTER_PRODUCTS:
       return {
         ...state,
-        filtered: state.contacts.filter(contact => {
+        filtered: state.products.filter(product => {
           const regex = new RegExp(`${action.payload}`, 'gi');
-          return contact.name.match(regex) || contact.email.match(regex);
+          return product.name.match(regex) || product.email.match(regex);
         })
       };
     case CLEAR_FILTER:
@@ -79,7 +72,7 @@ export default (state, action) => {
         ...state,
         filtered: null
       };
-    case CONTACT_ERROR:
+    case PRODUCT_ERROR:
       return {
         ...state,
         error: action.payload

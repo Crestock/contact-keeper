@@ -11,10 +11,11 @@ connectDB();
 app.use(express.json({ extended: false }));
 
 // Define Routes
-app.use("/api/users", require("./routes/users"));
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/contacts", require("./routes/contacts"));
-app.use("/api/catalogs", require("./routes/catalogs"));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/contacts', require('./routes/contacts'));
+app.use('/api/products', require('./routes/products'));
+
 // Serve static assets in production
 if (process.env.NODE_ENV === "production") {
   // Set static folder

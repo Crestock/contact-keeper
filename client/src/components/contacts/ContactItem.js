@@ -4,7 +4,7 @@ import ContactContext from "../../context/contact/contactContext";
 
 const ContactItem = ({ contact }) => {
   const contactContext = useContext(ContactContext);
-  const { deleteContact, setCurrent, clearCurrent } = contactContext;
+  const { deleteContact, setCurrent, clearCurrent,addMerge } = contactContext;
 
   const {
     _id,
@@ -35,7 +35,11 @@ const ContactItem = ({ contact }) => {
           style={{ float: "right" }}
           className={
             "badge " +
+<<<<<<< Updated upstream
             (unit_system === "metric" ? "badge-success" : "badge-primary")
+=======
+            (type === "professional" ? "badge-success" : "badge-primary")
+>>>>>>> Stashed changes
           }
         >
          {unit_system}
@@ -45,6 +49,7 @@ const ContactItem = ({ contact }) => {
         {email && (
           <li>
             <i className="fas fa-envelope-open" /> {email}
+<<<<<<< Updated upstream
           </li>
         )}
         {minL && (
@@ -63,6 +68,8 @@ const ContactItem = ({ contact }) => {
               <ul>{maxW}</ul>
               <ul>{maxT}</ul>
             </div>
+=======
+>>>>>>> Stashed changes
           </li>
         )}
         {phone && (
@@ -80,6 +87,12 @@ const ContactItem = ({ contact }) => {
         </button>
         <button className="btn btn-danger btn-sm" onClick={onDelete}>
           Delete
+        </button>
+        <button
+          className="btn btn-dark btn-sm"
+          onClick={() => addMerge(contact)}
+        >
+          Add Configuration
         </button>
       </p>
     </div>
