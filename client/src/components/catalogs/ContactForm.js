@@ -11,53 +11,20 @@ const ContactForm = () => {
       setContact(current);
     } else {
       setContact({
-        name: "",
-        email: "",
-        phone: "",
-        type: "personal",
-        minL: "",
-        minW: "",
-        minT: "",
-        maxL: "",
-        maxW: "",
-        maxT: "",
-        unit_system: "",
-        mat_cost: "",
-        comp_factor: ""
+        name: ""
+        
       });
     }
   }, [contactContext, current]);
 
   const [contact, setContact] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    type: "personal",
-    minL: "",
-    minW: "",
-    minT: "",
-    maxL: "",
-    maxW: "",
-    maxT: "",
-    unit_system: "",
-    mat_cost: "",
-    comp_factor: ""
+    name: ""
+   
   });
 
   const {
-    name,
-    email,
-    phone,
-    type,
-    minL,
-    minW,
-    minT,
-    maxL,
-    maxW,
-    maxT,
-    unit_system,
-    mat_cost,
-    comp_factor
+    name
+    
   } = contact;
 
   const onChange = e =>
@@ -89,7 +56,7 @@ const ContactForm = () => {
         value={name}
         onChange={onChange}
       />
-      <h5>Choose your unit system</h5>
+     {/* <h5>Choose your unit system</h5>
       <input
         type="radio"
         name="unit_system"
@@ -203,7 +170,7 @@ const ContactForm = () => {
           value={comp_factor}
           onChange={onChange}
         />
-      </div>
+     </div>*/}
       <input
         type="submit"
         value={current ? "Update Contact" : "Add Contact"}

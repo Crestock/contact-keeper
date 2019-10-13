@@ -5,16 +5,19 @@ const { check, validationResult } = require("express-validator/check");
 
 const User = require("../models/User");
 const Contact = require("../models/Catalog");
+const Products = require("../models/Contact");
 
-// @route     GET api/contacts
-// @desc      Get all users contacts
+// @route     GET api/catalogs
+// @desc      Get all users catalog items
 // @access    Private
 router.get("/", auth, async (req, res) => {
   try {
-    const contacts = await Contact.find({ user: req.user.id }).sort({
-      date: -1
-    });
-    res.json(contacts);
+    const catalog = await Catalog.find({ user: req.user.id })
+      .sort({
+        date: -1
+      })
+      .populate("ContactID");
+    res.json(catalogs);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -40,37 +43,11 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const {
-      name,
-      email,
-      phone,
-      type,
-      minL,
-      minW,
-      minT,
-      maxL,
-      maxW,
-      maxT,
-      unit_system,
-      mat_cost,
-      comp_factor
-    } = req.body;
+    const { name } = req.body;
 
     try {
       const newContact = new Contact({
         name,
-        email,
-        phone,
-        type,
-        minL,
-        minW,
-        minT,
-        maxL,
-        maxW,
-        maxT,
-        unit_system,
-        mat_cost,
-        comp_factor,
         user: req.user.id
       });
 
@@ -88,36 +65,11 @@ router.post(
 // @desc      Update contact
 // @access    Private
 router.put("/:id", auth, async (req, res) => {
-  const {
-    name,
-    email,
-    phone,
-    type,
-    minL,
-    minW,
-    minT,
-    maxL,
-    maxW,
-    maxT,
-    unit_system
-  } = req.body;
+  const { name } = req.body;
 
   // Build contact object
   const contactFields = {};
   if (name) contactFields.name = name;
-  if (email) contactFields.email = email;
-  if (phone) contactFields.phone = phone;
-  if (type) contactFields.type = type;
-  if (minL) contactFields.minL = minL;
-  if (minW) contactFields.minW = minW;
-  if (minT) contactFields.minT = minT;
-  if (maxL) contactFields.maxL = maxL;
-  if (maxW) contactFields.maxW = maxW;
-  if (maxT) contactFields.maxT = maxT;
-  if (unit_system) contactFields.unit_system = unit_system;
-  if (mat_cost) contactFields.mat_cost = mat_cost;
-  if (comp_factor) contactFields.comp_factor = comp_factor;
-
 
   try {
     let contact = await Contact.findById(req.params.id);
